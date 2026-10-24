@@ -126,7 +126,7 @@ class Scanner:
         for rule, hits in zip(self.rules, all_hits):
             if evaluate(rule.condition, info, hits, rule.string_names):
                 matches.append(Match(rule.name, rule.tags, rule.meta,
-                                     {k: sorted(v) for k, v in hits.items() if v}))
+                                     {n: sorted(hits[n]) for n in rule.string_names if hits.get(n)}))
         return matches
 
     def scan_file(self, path):
